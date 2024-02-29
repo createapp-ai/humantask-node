@@ -11,7 +11,10 @@ interface IParams {
 class HumanTask {
   private apiKey: string;
 
-  constructor({ apiKey = process.env['HUMANTASK_API_KEY'] }: { apiKey?: string }) {
+  constructor({ apiKey }: { apiKey?: string }) {
+    if (!apiKey) {
+      apiKey = process.env['HUMANTASK_API_KEY'];
+    }
     if (!apiKey) {
       throw new Error("apiKey must be provided");
     }
